@@ -1,0 +1,39 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <include package="zope.component" file="meta.zcml" />
+
+  <include package="chameleon.core" />
+  <include package="chameleon.zpt" />
+  <include package="playmobile.interfaces.rendering"
+
+  <utility name="widget"
+    component=".expressions.widget_translator" />
+
+  <utility name="fieldwidget"
+    component=".expressions.field_widget_translator" />
+
+  <utility factory=".engine.TemplateEngine"
+           provides="playmobile.interfaces.rendering.IRenderingEngine"/>
+
+  <adapter factory=".widgets.BasicPhoneNumberWidget"
+           provides="playmobile.interfaces.rendering.IFieldWidget" />
+
+  <adapter factory=".widgets.AdvancedPhoneNumberWidget"
+           provides="playmobile.interfaces.rendering.IFieldWidget"/>
+
+  <adapter factory=".widgets.BasicAddressWidget"
+           provides="playmobile.interfaces.rendering.IWidget" />
+
+  <adapter factory=".widgets.StaticGoogleMapWidget"
+           provides="playmobile.interfaces.rendering.IWidget" />
+
+  <adapter factory=".widgets.GoogleMapWidget"
+           provides="playmobile.interfaces.rendering.IWidget" />
+
+  <adapter factory=".widgets.ImageURLWidget"
+           provides="playmobile.interfaces.rendering.IFieldWidget" />
+
+  <adapter factory=".widgets.NullImageURLWidget"
+           provides="playmobile.interfaces.rendering.IFieldWidget" />
+
+</configure>

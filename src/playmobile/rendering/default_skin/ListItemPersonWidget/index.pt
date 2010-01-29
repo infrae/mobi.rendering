@@ -1,0 +1,19 @@
+<div class="person">
+  <style>
+    a.avatar { display: block; float: left; }
+    a.avatar img { margin: 0 10px 10px 0; }
+  </style>
+  <a class="avatar" 
+     tal:attributes="href context.get_path()"
+     tal:content="structure fieldwidget:context#avatar_url">
+       Image widget
+  </a>
+  <div>
+    <a tal:attributes="href context.get_path()">
+      ${context.first_name} ${context.last_name}
+    </a>
+  </div>
+  <div tal:content="structure fieldwidget:context#phone_number">
+      Phone Number Widget
+  </div>
+</div>

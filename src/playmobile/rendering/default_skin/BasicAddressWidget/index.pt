@@ -1,0 +1,9 @@
+<div class="address">
+  <div style="margin-top: 3px; font-weight: bold" class="title">${context.title}</div>
+  <div class="street">${context.street}</div>
+  <div>
+    <span class="postal_code">${context.postal_code}</span>
+    <span class="city">${context.city}</span>
+  </div>
+  <div>${context.country}</div>
+</div>
