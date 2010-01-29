@@ -1,10 +1,8 @@
 <configure xmlns="http://namespaces.zope.org/zope">
 
   <include package="zope.component" file="meta.zcml" />
-
   <include package="chameleon.core" />
   <include package="chameleon.zpt" />
-  <include package="playmobile.interfaces.rendering"
 
   <utility name="widget"
     component=".expressions.widget_translator" />
@@ -13,7 +11,7 @@
     component=".expressions.field_widget_translator" />
 
   <utility factory=".engine.TemplateEngine"
-           provides="playmobile.interfaces.rendering.IRenderingEngine"/>
+           provides="playmobile.interfaces.rendering.IRenderingEngine" />
 
   <adapter factory=".widgets.BasicPhoneNumberWidget"
            provides="playmobile.interfaces.rendering.IFieldWidget" />
@@ -37,3 +35,4 @@
            provides="playmobile.interfaces.rendering.IFieldWidget" />
 
 </configure>
+

@@ -1,4 +1,5 @@
-from playmobile.interfaces.rendering import IRenderingEngine, IDeviceType
+from playmobile.interfaces.rendering import IRenderingEngine
+from playmobile.interfaces.devices import IDeviceType
 from zope.interface import implements, providedBy
 from chameleon.zpt.template import PageTemplateFile
 import os.path
