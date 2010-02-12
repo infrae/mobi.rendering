@@ -1,5 +1,6 @@
 from playmobile.interfaces.rendering import IRenderingEngine
 from playmobile.interfaces.devices import IDeviceType
+from playmobileaddressbook.cache import cache
 from zope.interface import implements, providedBy
 from chameleon.zpt.template import PageTemplateFile
 import os.path
@@ -40,6 +41,9 @@ class TemplateEngine(object):
         template = self.lookup_template(widget, name)
         if template is None:
             raise TemplateLookupError, "no template found for name %s" % name
-        return PageTemplateFile(template).render(**widget._template_locals())
+        def load_template():
+            return PageTemplateFile(template)
+        page_template = cache('template:%s' % template, load_template)
+        page_template.render(**widget._template_locals())
 
 
