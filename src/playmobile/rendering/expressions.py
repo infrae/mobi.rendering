@@ -37,6 +37,8 @@ class FieldWidgetFactory(object):
 class WidgetFactory(object):
 
     def __call__(self, context, view, request, name=u''):
+        if context is None:
+            return u''
         widget = getMultiAdapter((context, view, request,),
             IWidget, name=name)
 
