@@ -6,7 +6,7 @@
   <div class="avatar" tal:content="structure fieldwidget:context#avatar_url">
        Image widget
   </div>
-  <div>${context.first_name} ${context.last_name}</div>
+  <div>${context.full_name}</div>
   <div tal:content="structure fieldwidget:context#phone_number">
       Phone Number Widget
   </div>
