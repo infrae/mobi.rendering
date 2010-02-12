@@ -1,12 +1,11 @@
 from playmobile.interfaces.rendering import IRenderingEngine
 from playmobile.interfaces.devices import IDeviceType
-from playmobile.caching import Cache
-from playmobile.caching.backend import NoCacheBackend, DictBackend
+from playmobile.caching import Cache, NoCacheBackend
 from zope.interface import implements, providedBy
 from chameleon.zpt.template import PageTemplateFile
 import os.path
 
-cache_engine = Cache(DictBackend(), 'playmobile.rendering')
+cache_engine = Cache(NoCacheBackend(), 'playmobile.rendering')
 cache = cache_engine.cache
 
 class TemplateLookupError(Exception): pass
