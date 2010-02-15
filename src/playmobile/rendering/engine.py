@@ -5,7 +5,7 @@ from zope.interface import implements, providedBy
 from chameleon.zpt.template import PageTemplateFile
 import os.path
 
-cache_engine = Cache(NoCacheBackend(), 'playmobile.rendering')
+cache_engine = Cache(namespace='playmobile.rendering')
 cache = cache_engine.cache
 
 class TemplateLookupError(Exception): pass
