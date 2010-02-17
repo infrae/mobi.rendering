@@ -1,1 +1,1 @@
-<img tal:attributes="src value" />
+<img class="avatar" width="30" height="30" tal:attributes="src value" />

@@ -18,26 +18,20 @@ def get_class_name(instance):
 class TemplateEngine(object):
     implements(IRenderingEngine)
     name = 'default_skin'
-    base_path = None
+    search_path = [os.path.join(os.path.os.path.dirname(__file__), name)]
 
     def lookup_template(self, widget, name):
-        template_path = self.get_template_path(widget, name)
-        if os.path.exists(template_path):
-            return template_path
-        template_path = None
-        parent = super(TemplateEngine, self)
-        if IRenderingEngine.providedBy(parent):
-            template_path = parent.lookup_template(widget, name)
-        return template_path
+        template_paths = self.get_template_paths(widget, name)
+        for path in template_paths:
+            if os.path.exists(path):
+                return path
+        raise TemplateLookupError('No template found in %s' %
+            repr(template_paths))
 
-    def get_template_path(self, widget, name):
+    def get_template_paths(self, widget, name):
         widget_name = get_class_name(widget)
-        return os.path.join(self.get_base_path(), widget_name, '%s.pt' % name)
-
-    def get_base_path(self):
-        if self.base_path:
-            return self.base_path
-        return os.path.join(os.path.os.path.dirname(__file__), self.name)
+        return [os.path.join(path, widget_name, '%s.pt') % name
+            for path in self.search_path]
 
     def render_widget(self, widget, request, name='index'):
         def lookup_template():

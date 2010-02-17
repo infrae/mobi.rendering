@@ -58,7 +58,7 @@ class AdvancedPhoneNumberWidget(FieldWidget):
     adapts(IPhoneNumber, None , IAdvancedDeviceType)
 
     def render(self):
-        return u'<a href="tel:%s">%s</a>' % (self.get_value(), self.get_value())
+        return u'<a href="tel:%s" class="phone"></a>' % (self.get_value(), self.get_value())
 
 
 class BasicAddressWidget(Widget):

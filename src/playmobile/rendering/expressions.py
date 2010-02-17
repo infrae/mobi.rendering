@@ -54,11 +54,18 @@ class WidgetTranslator(expressions.ExpressionTranslator):
     # tal:replace tal:replace="structure widget:context.address"
 
     def translate(self, string, escape=None):
+        parts = string.strip().split('#')
+        if len(parts) == 2:
+            obj, name = parts
+        else:
+            obj = parts[0]
+            name = u''
+
         python_translator = expressions.PythonTranslator()
         # just validate
         python_translator.translate(string)
-        value = types.value("%s(%s, view, request)" % \
-                            (self.symbol, string.strip()))
+        value = types.value("%s(%s, view, request, name='%s')" % \
+                            (self.symbol, obj.strip(), name))
 
         value.symbol_mapping[self.symbol] = self.factory
         return value
