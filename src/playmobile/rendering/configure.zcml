@@ -3,6 +3,7 @@
   <include package="zope.component" file="meta.zcml" />
   <include package="chameleon.core" />
   <include package="chameleon.zpt" />
+  <include package="playmobile.interfaces" />
 
   <utility name="widget"
     component=".expressions.widget_translator" />

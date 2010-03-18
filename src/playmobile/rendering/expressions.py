@@ -5,7 +5,9 @@ from zope.schema import getFieldNames
 from chameleon.core import types
 from chameleon.zpt import expressions
 
-from playmobile.interfaces.rendering import IFieldWidget, IWidget
+from playmobile.interfaces.rendering import (IFieldWidget, IWidget,
+    IRenderingEngine,)
+from playmobile.rendering.engine import render_widget
 
 def get_field(context, field_name):
     schema_interfaces = []
@@ -31,7 +33,8 @@ class FieldWidgetFactory(object):
         else:
             widget = getMultiAdapter((field, view, request,),
                 IFieldWidget, name=name)
-        return widget.render()
+
+        return render_widget(widget)
 
 
 class WidgetFactory(object):
@@ -42,7 +45,7 @@ class WidgetFactory(object):
         widget = getMultiAdapter((context, view, request,),
             IWidget, name=name)
 
-        return widget.render()
+        return render_widget(widget)
 
 
 class WidgetTranslator(expressions.ExpressionTranslator):

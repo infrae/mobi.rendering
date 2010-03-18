@@ -1,15 +1,23 @@
-from zope.interface import implements, Interface
-from zope.component import adapts, getUtility
+from zope.interface import implements
+from zope.component import adapts, getMultiAdapter, getUtility
 from zope.schema.interfaces import IField, IURI
 
 from playmobile.interfaces.devices import (IBasicDeviceType,
     IStandardDeviceType, IAdvancedDeviceType,)
-from playmobile.interfaces.rendering import (IWidget, IFieldWidget,
-    IRenderingEngine,)
-from playmobile.interfaces.schema import (IPhoneNumber, IAddress,)
-
+from playmobile.interfaces.rendering import (IWidget, IFieldWidget, IPage,
+    IRenderingEngine)
+from playmobile.interfaces.schema import IPhoneNumber, IAddress
+from playmobile.rendering.engine import render_widget
 
 import urllib
+
+
+# TODO
+# ----
+# 
+#  - widget should not render itself it should get rendered (IRenderingEngine)
+#  - add ability for a widget to register some css and js into the header
+#
 
 
 class Widget(object):
@@ -19,19 +27,65 @@ class Widget(object):
     implements(IWidget)
     adapts(None, None, None)
 
+    page = None
+
     def __init__(self, context, parent_widget, request):
         self.context = context
         self.request = request
         self.parent = parent_widget
+        if IPage.providedBy(parent_widget):
+            self.page = parent_widget
+        else:
+            self.page = parent_widget.page
+
+    def update(self):
+        pass
 
     def _template_locals(self):
         return {'context': self.context,
                 'request': self.request,
                 'view': self}
 
+
+class Page(Widget):
+    """ Page adapts context and request without parent because it has none
+    """
+
+    implements(IPage)
+    adapts(None, None)
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+        self.parent = None
+        self.content = ''
+        self.facilities = {'head'  : list()}
+
+    def update(self):
+        pass
+
+    def register_resource(self, resource, facility='head'):
+        l = self.facilities[facility]
+        if resource not in l:
+            l.append(resource)
+        return resource
+
+    def _template_locals(self):
+        return {'content': self.content,
+                'context': self.context,
+                'request': self.request,
+                'view': self}
+
+    def render_resources(self, facility='head'):
+        return "\n".join([i() for i in self.facilities[facility]])
+
     def render(self):
-        template_engine = getUtility(IRenderingEngine)
-        return template_engine.render_widget(self, self.request)
+        render_engine = getUtility(IRenderingEngine)
+        main_widget = \
+            getMultiAdapter((self.context, self, self.request,), IWidget)
+        main_widget.update()
+        self.content = render_engine.render_widget(main_widget)
+        return render_engine.render_widget(self)
 
 
 class FieldWidget(Widget):

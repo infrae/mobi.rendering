@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+    <meta name="viewport" content="width=device-width,user-scalable=yes" />
+    <link rel="stylesheet" type="text/css" href="/static/css/advanced.css" />
+    <link rel="apple-touch-icon"
+          href="/static/images/advanced/search-button.png" />
+    <tal:block tal:replace="structure view.render_resources('head')" />
+</head>
+<body>
+<div class="top">
+  <div tal:replace="structure widget:context #breadcrumb" />
+  <div class="container">
+    <div style="clear: both" tal:content="structure content" />
+  </div>
+</div>
+</body>
+</html>
