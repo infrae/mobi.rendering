@@ -8,6 +8,7 @@ from playmobile.interfaces.rendering import (IWidget, IFieldWidget, IPage,
     IRenderingEngine)
 from playmobile.interfaces.schema import IPhoneNumber, IAddress
 from playmobile.rendering.engine import render_widget
+from playmobile.rendering.resource import JS
 
 import urllib
 
@@ -71,10 +72,9 @@ class Page(Widget):
         return resource
 
     def _template_locals(self):
-        return {'content': self.content,
-                'context': self.context,
-                'request': self.request,
-                'view': self}
+        locals_ = super(Page, self)._template_locals()
+        locals_.update({'content': self.content})
+        return locals_
 
     def render_resources(self, facility='head'):
         return "\n".join([i() for i in self.facilities[facility]])
@@ -112,7 +112,8 @@ class AdvancedPhoneNumberWidget(FieldWidget):
     adapts(IPhoneNumber, None , IAdvancedDeviceType)
 
     def render(self):
-        return u'<a href="tel:%s" class="phone"></a>' % (self.get_value(), self.get_value())
+        return u'<a href="tel:%s" class="phone"></a>' % \
+            (self.get_value(), self.get_value())
 
 
 class BasicAddressWidget(Widget):
@@ -123,14 +124,11 @@ class GMWidget(Widget):
     """ Google map widget
     """
 
-    API_KEY = "ABQIAAAAIt9s0bdfR5Od4DreqvmckxS7QSeUpOtCYzRjfvthYEaCVh0HbhQAvIJtRk-ZGzltUZRngBeyJoCWBQ"
+    api_key = "ABQIAAAAIt9s0bdfR5Od4DreqvmckxS7QSeUpOtCYzRjfvt" \
+            "hYEaCVh0HbhQAvIJtRk-ZGzltUZRngBeyJoCWBQ"
 
-    def _template_locals(self):
-        tlocals = super(GMWidget, self)._template_locals()
-        tlocals.update({'quoted_gm_address': self.get_quoted_gm_address(),
-            'gm_address': self.get_gm_address(),
-            'api_key': self.API_KEY})
-        return tlocals
+    def update(self):
+        super(GMWidget, self).update()
 
     def get_gm_address(self):
         address = self.context
@@ -147,6 +145,13 @@ class StaticGoogleMapWidget(GMWidget):
 
 class GoogleMapWidget(GMWidget):
     adapts(IAddress, None, IAdvancedDeviceType)
+
+    api_url = 'http://maps.google.com/maps/api/js?sensor=false&amp;key=%s'
+
+    def update(self):
+        super(GoogleMapWidget, self).update()
+        self.page.register_resource(
+            JS(self.api_url % self.api_key))
 
 
 class NullImageURLWidget(FieldWidget):
