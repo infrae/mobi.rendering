@@ -16,6 +16,9 @@ setup(name='playmobile.rendering',
         'zope.schema',
         'zope.component',
         'playmobile.interfaces',
-        'playmobile.caching'
+        'playmobile.schema',
+        'playmobile.caching',
+        'nose',
       ],
+      test_suite='nose.collector',
      )

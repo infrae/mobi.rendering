@@ -1,0 +1,4 @@
+<!-- start basic field widget to render a ITextLine -->
+<strong>${value}</strong>
+<!-- end widget -->
+

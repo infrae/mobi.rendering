@@ -1,0 +1,7 @@
+<!-- start widget to render ITextLine on IAdvancedDeviceType devices -->
+<div class="fancy_templace">
+  <div class="for advanced devices">
+    ${value}
+  </div>
+</div>
+<!-- end widget -->

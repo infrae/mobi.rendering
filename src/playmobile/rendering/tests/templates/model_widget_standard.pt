@@ -1,0 +1,8 @@
+<!-- widget to render IModel on IStandardDeviceType devices -->
+<div class="fancy widget">
+  <div class="for standard devices">
+    <div class="to render a model"
+        tal:content="structure fieldwidget: context#name" />
+  </div>
+</div>
+<!-- end widget -->

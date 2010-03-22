@@ -7,12 +7,25 @@ from playmobile.caching import Cache
 
 import os.path
 import sys
+import re
 
 cache_engine = Cache(namespace='playmobile.rendering')
 cache = cache_engine.cache
 
 
 class TemplateLookupError(Exception): pass
+
+UNDERSCORE_REGEXS = [
+    (re.compile(r'([A-Z]+)([A-Z][a-z])'), r'\1_\2'),
+    (re.compile(r'([a-z\d])([A-Z])'), r'\1_\2'),
+    (re.compile(r'-'), '_')
+]
+
+def underscore(camel_case_str):
+    res = camel_case_str
+    for pattern, repl in UNDERSCORE_REGEXS:
+        res = re.sub(pattern, repl, res)
+    return res.lower()
 
 
 def get_class_name(instance):
@@ -27,7 +40,7 @@ class TemplateEngine(object):
     name = 'default_skin'
     search_path = [os.path.join(os.path.os.path.dirname(__file__), name)]
 
-    def lookup_template(self, widget, name):
+    def lookup_template(self, widget, name='index'):
         template_paths = self.get_template_paths(widget, name)
         for path in template_paths:
             if os.path.exists(path):
@@ -35,10 +48,15 @@ class TemplateEngine(object):
         raise TemplateLookupError('No template found in %s' %
             repr(template_paths))
 
-    def get_template_paths(self, widget, name):
+    def get_template_paths(self, widget, name='index'):
         widget_name = get_class_name(widget)
-        return [os.path.join(path, widget_name, '%s.pt') % name
-            for path in self.search_path]
+        paths = []
+        for path in self.search_path:
+            if name == 'index':
+                paths.append(os.path.join(
+                    path, "%s.pt" % underscore(widget_name)))
+            paths.append(os.path.join(path, widget_name, '%s.pt') % name)
+        return paths
 
     def render_widget(self, widget, name='index'):
         if hasattr(widget, 'template'):
