@@ -34,7 +34,6 @@
     >>> class TestRequest(object):
     ...    pass
 
-
     Now we can instantiate the page.
 
     >>> context = Model()
