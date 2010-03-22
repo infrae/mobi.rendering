@@ -37,7 +37,7 @@ class HTMLTagResource(Resource):
                self.content == other.content
 
     def __call__(self):
-        autoclose = self.content and False or self.autoclose
+        autoclose = not self.content and self.autoclose
         attributes_html = " ".join(
             ['%s="%s"' % (name, value,)
                 for (name, value,) in self.attributes.iteritems()])
