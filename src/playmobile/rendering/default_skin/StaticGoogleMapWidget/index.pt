@@ -8,5 +8,5 @@
   <div>${context.country}</div>
 </div>
 <div class="location-image">
-  <img src="http://maps.google.com/maps/api/staticmap?size=200x300&amp;maptype=roadmap&amp;markers=size:mid|color:red|${view.get_quoted_gm_address()}&amp;mobile=true&amp;sensor=false&amp;key=${view.api_key}" />
+  <img src="${view.get_image_url()}" />
 </div>

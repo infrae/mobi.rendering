@@ -8,7 +8,7 @@
   <div>${context.country}</div>
 </div>
 
-<div id="map_canvas" style="width:260px; height:200px"></div>
+<div id="map_canvas" style="width:${view.width}px; height:${view.height}px"></div>
 <script type="text/javascript" charset="utf-8">
 
 var geocoder;

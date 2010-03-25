@@ -124,6 +124,8 @@ class GMWidget(Widget):
     """ Google map widget
     """
 
+    size = '260x200'
+
     api_key = "ABQIAAAAIt9s0bdfR5Od4DreqvmckxS7QSeUpOtCYzRjfvt" \
             "hYEaCVh0HbhQAvIJtRk-ZGzltUZRngBeyJoCWBQ"
 
@@ -138,9 +140,22 @@ class GMWidget(Widget):
     def get_quoted_gm_address(self):
         return urllib.quote(self.get_gm_address())
 
+    @property
+    def width(self):
+        return self.size.split('x')[0]
+
+    @property
+    def height(self):
+        return self.size.split('x')[1]
 
 class StaticGoogleMapWidget(GMWidget):
     adapts(IAddress, None, IStandardDeviceType)
+
+    def get_image_url(self):
+        return "http://maps.google.com/maps/api/staticmap?size=%s" \
+        "&amp;maptype=roadmap&amp;markers=size:mid|color:red|%s" \
+        "&amp;mobile=true&amp;sensor=false&amp;key=%s" % \
+            (self.size, self.get_quoted_gm_address(), self.api_key)
 
 
 class GoogleMapWidget(GMWidget):
