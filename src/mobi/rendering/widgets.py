@@ -2,13 +2,13 @@ from zope.interface import implements
 from zope.component import adapts, getMultiAdapter, getUtility
 from zope.schema.interfaces import IField, IURI
 
-from playmobile.interfaces.devices import (IBasicDeviceType,
+from mobi.interfaces.devices import (IBasicDeviceType,
     IStandardDeviceType, IAdvancedDeviceType,)
-from playmobile.interfaces.rendering import (IWidget, IFieldWidget, IPage,
+from mobi.interfaces.rendering import (IWidget, IFieldWidget, IPage,
     IRenderingEngine)
-from playmobile.interfaces.schema import IPhoneNumber, IAddress
-from playmobile.rendering.engine import render_widget
-from playmobile.rendering.resource import JS
+from mobi.interfaces.schema import IPhoneNumber, IAddress
+from mobi.rendering.engine import render_widget
+from mobi.rendering.resource import JS
 
 import urllib
 

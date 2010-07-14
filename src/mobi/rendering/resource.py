@@ -1,5 +1,5 @@
 from zope.interface import implements
-from playmobile.interfaces.rendering import IResource, IHTMLTagResource
+from mobi.interfaces.rendering import IResource, IHTMLTagResource
 
 
 class Resource(object):

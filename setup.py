@@ -2,7 +2,7 @@
 
 from setuptools import setup, find_packages
 
-setup(name='playmobile.rendering',
+setup(name='mobi.rendering',
       version='0.1dev',
       description='Mobile Device management',
       author='Infrae',
@@ -10,14 +10,14 @@ setup(name='playmobile.rendering',
       url='infrae.com',
       package_dir={'': 'src'},
       packages=find_packages('src'),
-      namespace_packages=['playmobile'],
+      namespace_packages=['mobi'],
       install_requires=[
         'zope.interface',
         'zope.schema',
         'zope.component',
-        'playmobile.interfaces',
-        'playmobile.schema',
-        'playmobile.caching',
+        'mobi.interfaces',
+        'mobi.schema',
+        'mobi.caching',
         'nose',
       ],
       test_suite='nose.collector',

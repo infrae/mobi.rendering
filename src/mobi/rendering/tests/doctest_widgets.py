@@ -1,7 +1,7 @@
 """
 
-    >>> from playmobile.rendering.widgets import *
-    >>> from playmobile.interfaces.rendering import *
+    >>> from mobi.rendering.widgets import *
+    >>> from mobi.interfaces.rendering import *
     >>> from zope.interface.verify import verifyClass
 
     A wigdet implements the IWidget interface.
@@ -40,7 +40,7 @@
     >>> request = TestRequest()
     >>> page = Page(context, request)
     >>> page # doctest: +ELLIPSIS
-    <playmobile.rendering.widgets.Page ...>
+    <mobi.rendering.widgets.Page ...>
 
 
     We define a widget to render the IModel implementers.
@@ -107,7 +107,7 @@
 
     We register the widget for the standard device type.
 
-    >>> from playmobile.interfaces.devices import (IAdvancedDeviceType,
+    >>> from mobi.interfaces.devices import (IAdvancedDeviceType,
     ...    IStandardDeviceType)
     >>> registerAdapter(ModelWidgetStandard,
     ...     (IModel, None, IStandardDeviceType,),
@@ -231,9 +231,9 @@
 
 
 from zope.component import getGlobalSiteManager
-from playmobile.rendering.engine import TemplateEngine
-from playmobile.interfaces.rendering import IRenderingEngine
-from playmobile.rendering.expressions import (widget_translator,
+from mobi.rendering.engine import TemplateEngine
+from mobi.interfaces.rendering import IRenderingEngine
+from mobi.rendering.expressions import (widget_translator,
     field_widget_translator,)
 import os
 

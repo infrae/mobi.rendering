@@ -2,14 +2,14 @@ from zope.interface import implements
 from zope.component import getUtility
 from chameleon.zpt.template import PageTemplateFile
 
-from playmobile.interfaces.rendering import IRenderingEngine
-from playmobile.caching import Cache
+from mobi.interfaces.rendering import IRenderingEngine
+from mobi.caching import Cache
 
 import os.path
 import sys
 import re
 
-cache_engine = Cache(namespace='playmobile.rendering')
+cache_engine = Cache(namespace='mobi.rendering')
 cache = cache_engine.cache
 
 

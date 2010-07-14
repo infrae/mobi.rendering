@@ -5,9 +5,9 @@ from zope.schema import getFieldNames
 from chameleon.core import types
 from chameleon.zpt import expressions
 
-from playmobile.interfaces.rendering import (IFieldWidget, IWidget,
+from mobi.interfaces.rendering import (IFieldWidget, IWidget,
     IRenderingEngine,)
-from playmobile.rendering.engine import render_widget
+from mobi.rendering.engine import render_widget
 
 def get_field(context, field_name):
     schema_interfaces = []
