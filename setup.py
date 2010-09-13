@@ -12,7 +12,7 @@ setup(name='mobi.rendering',
       long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       author_email='info@infrae.com',
-      url='infrae.com',
+      url='http://mobi.infrae.com/',
       package_dir={'': 'src'},
       packages=find_packages('src'),
       namespace_packages=['mobi'],
