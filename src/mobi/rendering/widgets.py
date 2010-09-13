@@ -9,7 +9,6 @@ from mobi.interfaces.devices import (IBasicDeviceType,
 from mobi.interfaces.rendering import (IWidget, IFieldWidget, IPage,
     IRenderingEngine)
 from mobi.interfaces.schema import IPhoneNumber, IAddress
-from mobi.rendering.engine import render_widget
 from mobi.rendering.resource import JS
 
 import urllib

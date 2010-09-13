@@ -7,8 +7,7 @@ from zope.schema import getFieldNames
 from chameleon.core import types
 from chameleon.zpt import expressions
 
-from mobi.interfaces.rendering import (IFieldWidget, IWidget,
-    IRenderingEngine,)
+from mobi.interfaces.rendering import IFieldWidget, IWidget
 from mobi.rendering.engine import render_widget
 
 def get_field(context, field_name):
