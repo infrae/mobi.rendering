@@ -1,3 +1,5 @@
+# Copyright (c) 2010 Infrae. All rights reserved.
+# See also LICENSE.txt.
 from zope.component import getMultiAdapter, providedBy
 from zope.schema.interfaces import IObject
 from zope.schema import getFieldNames

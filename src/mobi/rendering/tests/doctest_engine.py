@@ -1,3 +1,5 @@
+# Copyright (c) 2010 Infrae. All rights reserved.
+# See also LICENSE.txt.
 """
     >>> from mobi.rendering.engine import TemplateEngine
     >>> from mobi.interfaces.rendering import IRenderingEngine
