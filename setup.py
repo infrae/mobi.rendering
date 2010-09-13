@@ -1,14 +1,16 @@
 #!/usr/bin/env python
 
 from setuptools import setup, find_packages
+import os
 
 version="1.0"
 
-
 setup(name='mobi.rendering',
       version=version,
-      description='Mobile Device management',
+      description='Mobile rendering library',
       author='Infrae',
+      long_description=open("README.rst").read() + "\n" +
+                       open(os.path.join("docs", "HISTORY.txt")).read(),
       author_email='info@infrae.com',
       url='infrae.com',
       package_dir={'': 'src'},
